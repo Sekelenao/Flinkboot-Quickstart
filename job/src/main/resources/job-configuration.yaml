@@ -1,0 +1,36 @@
+job:
+  name: "flinkboot-heartbeat-monitor"
+  environment:
+    execution:
+      runtime-mode: "STREAMING"
+      parallelism: 2
+      buffer-timeout-ms: 100
+    checkpointing:
+      enabled: true
+      interval-ms: 10000
+      mode: "EXACTLY_ONCE"
+    restart-strategy:
+      type: "FIXED_DELAY"
+      fixed-delay:
+        attempts: 3
+        delay-ms: 2000
+    properties:
+      pipeline.operator-chaining.enabled: "false"
+
+kafka-source:
+  name: "heartbeat-kafka-source"
+  bootstrap-servers:
+    - "localhost:9092"
+  group-id: "heartbeat-monitor-group"
+  topics:
+    - "heartbeats.raw"
+  starting-offsets: "EARLIEST"
+
+kafka-sink:
+  name: "heartbeat-kafka-sink"
+  bootstrap-servers:
+    - "localhost:9092"
+  topic: "heartbeats.alerts"
+  delivery-guarantee: "AT_LEAST_ONCE"
+
+max-latency: "PT0.500S"

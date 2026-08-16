@@ -5,31 +5,34 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.sekelenao</groupId>
-    <artifactId>FlinkWorkflowsWithChainedEvents</artifactId>
+    <artifactId>flinkboot-quickstart</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
+    <name>Flinkboot Quickstart</name>
+    <description>Zero-boilerplate Apache Flink quickstart application powered by Flinkboot</description>
+
     <modules>
-        <module>Producers</module>
-        <module>DelayWorkflow</module>
+        <module>job</module>
+        <module>producer</module>
     </modules>
 
     <properties>
-
-        <dependency.flinkboot.version>0.1.0-1.20</dependency.flinkboot.version>
-        <dependency.small-yaml.version>0.2.0</dependency.small-yaml.version>
-        <dependency.logback.version>1.5.34</dependency.logback.version>
-
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <dependency.flinkboot.version>0.2.0-1.20</dependency.flinkboot.version>
+        <dependency.logback.version>1.5.16</dependency.logback.version>
+        <plugin.maven-compiler.version>3.13.0</plugin.maven-compiler.version>
+        <plugin.maven-shade.version>3.6.0</plugin.maven-shade.version>
+        <plugin.maven-surefire.version>3.5.2</plugin.maven-surefire.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-
+            <!-- Flinkboot BOM : Manages Flink 1.20, Kafka connectors, Jackson, Log4j, JUnit, provided scopes -->
             <dependency>
                 <groupId>io.github.sekelenao</groupId>
                 <artifactId>flinkboot</artifactId>
@@ -38,12 +41,12 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- Internal module -->
             <dependency>
                 <groupId>io.github.sekelenao</groupId>
-                <artifactId>small-yaml</artifactId>
-                <version>${dependency.small-yaml.version}</version>
+                <artifactId>job</artifactId>
+                <version>${project.version}</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -53,11 +56,22 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.13.0</version>
+                    <version>${plugin.maven-compiler.version}</version>
                     <configuration>
-                        <source>${maven.compiler.source}</source>
-                        <target>${maven.compiler.target}</target>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <release>${java.version}</release>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${plugin.maven-surefire.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${plugin.maven-shade.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

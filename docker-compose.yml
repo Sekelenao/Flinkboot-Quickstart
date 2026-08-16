@@ -11,7 +11,7 @@ services:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: 'broker,controller'
       KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka:9093'
-      KAFKA_KRAFT_CLUSTER_ID: '4L62xAE2Txy7zSKOQtgGMA' # Pre-generated stable UUID
+      KAFKA_KRAFT_CLUSTER_ID: '4L62xAE2Txy7zSKOQtgGMA'
       # Listener config (Internal on 29092, external host on 9092, controllers on 9093)
       KAFKA_LISTENERS: 'PLAINTEXT://0.0.0.0:29092,PLAINTEXT_HOST://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093'
       KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092'
@@ -26,7 +26,7 @@ services:
     volumes:
       - kafka_data:/var/lib/kafka/data
     networks:
-      - FWCE
+      - flinkboot-network
 
   # --- KAFKA WEB UI ---
   kafka-ui:
@@ -41,11 +41,11 @@ services:
     depends_on:
       - kafka
     networks:
-      - FWCE
+      - flinkboot-network
 
   # --- FLINK JOBMANAGER ---
   flink-jobmanager:
-    image: flink:1.20-java11
+    image: flink:1.20-java17
     container_name: flink-jobmanager
     hostname: flink-jobmanager
     ports:
@@ -56,11 +56,11 @@ services:
         FLINK_PROPERTIES=
         jobmanager.rpc.address: flink-jobmanager
     networks:
-      - FWCE
+      - flinkboot-network
 
   # --- FLINK TASKMANAGER ---
   flink-taskmanager:
-    image: flink:1.20-java11
+    image: flink:1.20-java17
     container_name: flink-taskmanager
     depends_on:
       - flink-jobmanager
@@ -71,12 +71,12 @@ services:
         jobmanager.rpc.address: flink-jobmanager
         taskmanager.numberOfTaskSlots: 2
     networks:
-      - FWCE
+      - flinkboot-network
 
 volumes:
   kafka_data:
     driver: local
 
 networks:
-  FWCE:
+  flinkboot-network:
     driver: bridge

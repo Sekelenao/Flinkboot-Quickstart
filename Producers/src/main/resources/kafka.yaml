@@ -1,6 +1,0 @@
-kafka:
-  topic:
-    events: "chained-events"
-  bootstrap:
-    servers:
-      - "localhost:9092"
