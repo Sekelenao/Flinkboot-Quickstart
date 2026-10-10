@@ -55,7 +55,7 @@ public class Main {
             .name(configuration.printingAlert().name());
 
         configuration.job().environment().flatMap(ExecutionEnvironmentProperties::localWebUi)
-            .ifPresent(ui -> System.out.printf("🚀 Web UI: http://%s:%s%n", ui.bindAddress().orElse("localhost"), ui.port().orElse(8081)));
+            .ifPresent(ui -> System.out.printf("Web UI: http://%s:%s%n", ui.bindAddress().orElse("localhost"), ui.port().orElse(8081)));
 
         // 8. Execute pipeline
         environment.execute(configuration.job().name());
