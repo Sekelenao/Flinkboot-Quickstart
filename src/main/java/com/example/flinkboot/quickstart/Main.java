@@ -50,8 +50,8 @@ public class Main {
             .name(alertProperties.name())
             .setParallelism(alertProperties.parallelism());
 
-        // 7. Print intercepted alerts
-        alertStream.print();
+        alertStream.print()
+            .name(configuration.printingAlert().name());
 
         // 8. Execute pipeline
         environment.execute(configuration.job().name());

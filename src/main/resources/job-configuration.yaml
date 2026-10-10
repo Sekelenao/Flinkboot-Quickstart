@@ -23,21 +23,33 @@ job:
       enabled: true
       port: 8080
       bind-address: "localhost"
+    # Custom runtime properties
+    properties:
+      # Disabled here solely for local demo / educational purposes to decouple operators
+      # into separate task vertices in the Flink Web UI (so you can visualize Source, Filter, and Map individually).
+      # WARNING - DO NOT DO THIS IN PRODUCTION:
+      # Operator chaining is a critical Flink performance optimization that executes consecutive operators
+      # within the same thread by passing object references directly. Disabling it forces serialization,
+      # buffer pooling, and thread-to-thread handoffs, significantly reducing throughput and increasing latency.
+      pipeline.operator-chaining.enabled: "false"
 
 source:
-  name: "space-cargo-source"
+  name: "Space Cargo Source"
   parallelism: 1
-  rate-per-second: 1.0
+  rate-per-second: 3.0
   max-items-per-cargo: 3
   # total-records: 100 # Optional (defaults to Long.MAX_VALUE)
 
 forbidden-items:
-  name: "forbidden-items-filter"
+  name: "Forbidden Items Filter"
   parallelism: 1
   items:
     - "ALIEN_EGG"
 
 alert:
-  name: "customs-alert-map"
+  name: "Customs Alert Map"
   parallelism: 1
   alert-prefix: "🚨 [QUARANTINE ALERT] Intercepted illegal cargo: "
+
+printing-alert-sink:
+  name: "Printing Alert Sink"

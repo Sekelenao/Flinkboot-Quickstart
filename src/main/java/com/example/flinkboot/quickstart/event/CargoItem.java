@@ -1,7 +1,6 @@
 package com.example.flinkboot.quickstart.event;
 
 public enum CargoItem {
-
     ZERO_GRAVITY_VINTAGE_WINE,
     QUANTUM_PROCESSOR,
     OXYGEN_TANK,
@@ -20,8 +19,6 @@ public enum CargoItem {
     DEATH_STAR_BLUEPRINTS,
     DEATH_NOTE,
     DALEK_VOICE_SYNTHESIZER,
-
-    // Forbidden items
     ALIEN_EGG
 
 }
