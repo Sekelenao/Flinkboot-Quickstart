@@ -6,6 +6,7 @@ import com.example.flinkboot.quickstart.operator.AlertMapFunction;
 import com.example.flinkboot.quickstart.operator.ForbiddenItemsFilterFunction;
 import com.example.flinkboot.quickstart.source.SpaceCargoGenerator;
 import io.github.sekelenao.flinkboot.core.api.Flinkboot;
+import io.github.sekelenao.flinkboot.core.api.properties.ExecutionEnvironmentProperties;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.connector.source.util.ratelimit.RateLimiterStrategy;
@@ -52,6 +53,9 @@ public class Main {
 
         alertStream.print()
             .name(configuration.printingAlert().name());
+
+        configuration.job().environment().flatMap(ExecutionEnvironmentProperties::localWebUi)
+            .ifPresent(ui -> System.out.printf("🚀 Web UI: http://%s:%s%n", ui.bindAddress().orElse("localhost"), ui.port().orElse(8081)));
 
         // 8. Execute pipeline
         environment.execute(configuration.job().name());
