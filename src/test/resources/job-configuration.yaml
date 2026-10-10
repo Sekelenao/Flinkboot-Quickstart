@@ -1,0 +1,43 @@
+job:
+  name: "Flinkboot-Quickstart"
+  environment:
+    # Execution tuning: lightweight single-slot execution for local dev laptops
+    execution:
+      runtime-mode: "STREAMING"
+      parallelism: 1
+      buffer-timeout: "PT0.1S"
+    # Periodic checkpointing: showcases live checkpoints in the local Web UI
+    checkpointing:
+      enabled: true
+      interval: "PT10S"
+      mode: "EXACTLY_ONCE"
+      timeout: "PT1M"
+    # Restart strategy: 3 attempts with 5s delay on failure
+    restart-strategy:
+      type: "FIXED_DELAY"
+      fixed-delay:
+        attempts: 3
+        delay: "PT5S"
+    # Local MiniCluster Web UI
+    local-web-ui:
+      enabled: true
+      port: 8080
+      bind-address: "localhost"
+
+source:
+  name: "space-cargo-source"
+  parallelism: 1
+  rate-per-second: 1.0
+  max-items-per-cargo: 3
+  # total-records: 100 # Optional (defaults to Long.MAX_VALUE)
+
+forbidden-items:
+  name: "forbidden-items-filter"
+  parallelism: 1
+  items:
+    - "ALIEN_EGG"
+
+alert:
+  name: "customs-alert-map"
+  parallelism: 1
+  alert-prefix: "🚨 [QUARANTINE ALERT] Intercepted illegal cargo: "

@@ -1,0 +1,10 @@
+# Maven build output
+target/
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# Logs
+*.log
