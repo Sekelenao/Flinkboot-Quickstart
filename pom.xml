@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
-        <dependency.flinkboot.version>0.5.0-1.20</dependency.flinkboot.version>
+        <dependency.flinkboot.version>0.6.0-1.20</dependency.flinkboot.version>
         <dependency.flink.version>1.20.5</dependency.flink.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -19,7 +19,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.github.sekelenao</groupId>
+                <groupId>com.flinkboot</groupId>
                 <artifactId>flinkboot</artifactId>
                 <version>${dependency.flinkboot.version}</version>
                 <type>pom</type>
@@ -32,7 +32,7 @@
 
         <!-- Core API & declarative bootstrapping -->
         <dependency>
-            <groupId>io.github.sekelenao</groupId>
+            <groupId>com.flinkboot</groupId>
             <artifactId>flinkboot-core</artifactId>
         </dependency>
 
@@ -67,7 +67,7 @@
 
         <!-- Testing API -->
         <dependency>
-            <groupId>io.github.sekelenao</groupId>
+            <groupId>com.flinkboot</groupId>
             <artifactId>flinkboot-test</artifactId>
             <scope>test</scope>
         </dependency>
@@ -77,5 +77,15 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.6.1</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

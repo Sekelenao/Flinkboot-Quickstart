@@ -3,7 +3,7 @@ package com.example.flinkboot.quickstart.event;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static io.github.sekelenao.flinkboot.test.api.assertion.FlinkbootAssertions.assertThat;
+import static com.flinkboot.test.api.assertion.FlinkbootAssertions.assertThat;
 
 final class SpaceCargoTest {
 

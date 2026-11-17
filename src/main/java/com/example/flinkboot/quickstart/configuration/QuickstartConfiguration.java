@@ -7,7 +7,7 @@ import com.example.flinkboot.quickstart.configuration.source.SourceProperties;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.github.sekelenao.flinkboot.core.api.properties.JobProperties;
+import com.flinkboot.core.api.properties.JobProperties;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
