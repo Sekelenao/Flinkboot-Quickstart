@@ -27,7 +27,7 @@ This application acts like an automatic **Space Customs Security Scanner**:
 
 ## Prerequisites
 
-- **Java 11+**
+- **Java 17+**
 - **Maven**
 - **IntelliJ IDEA**
 

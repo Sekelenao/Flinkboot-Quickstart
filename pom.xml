@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
-        <dependency.flinkboot.version>0.6.0-1.20</dependency.flinkboot.version>
-        <dependency.flink.version>1.20.5</dependency.flink.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <dependency.flinkboot.version>0.6.0-2.3</dependency.flinkboot.version>
+        <dependency.flink.version>2.3.0</dependency.flink.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
